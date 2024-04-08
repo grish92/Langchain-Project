@@ -36,3 +36,5 @@ def handle_user_input(user_query, website_url):
         elif isinstance(message, HumanMessage):
             with st.chat_message("Human"):
                 st.write(message.content)
+
+

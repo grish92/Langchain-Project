@@ -16,13 +16,14 @@ def get_response(user_input):
     return response['answer']
 
 
-def handle_user_input(user_query, website_url):
+def handle_user_input(user_query, website_url, pdf):
     if "chat_history" not in st.session_state:
         st.session_state.chat_history = [
             AIMessage(content="Hello, I am a bot.How I can help you?")
         ]
     if "vector_store" not in st.session_state:
-        st.session_state.vector_store = get_vectorstore_from_url(website_url)
+        st.session_state.vector_store = get_vectorstore_from_url(
+            website_url, pdf)
 
     if user_query is not None and user_query != '':
         response = get_response(user_query)
@@ -36,5 +37,3 @@ def handle_user_input(user_query, website_url):
         elif isinstance(message, HumanMessage):
             with st.chat_message("Human"):
                 st.write(message.content)
-
-

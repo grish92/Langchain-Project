@@ -2,12 +2,13 @@ from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain.chains import create_history_aware_retriever, create_retrieval_chain
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain_openai import ChatOpenAI
+import streamlit as st
 
 
 def get_context_retriever_chain(vector_store):
+    st.info(vector_store)
     llm = ChatOpenAI()
     retriever = vector_store.as_retriever()
-
     prompt = ChatPromptTemplate.from_messages([
         MessagesPlaceholder(variable_name='chat_history'),
         ("user", "{input}"),
